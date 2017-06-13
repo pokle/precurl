@@ -3,16 +3,18 @@ module Parse where
 import Data.Either (Either(..))
 import Prelude (class Show, (<>))
 
-data ParseError = OhNo String
+-- | A Parser is just a function 
+type Parser = ParseState -> Either ParseError ParseState
+
+newtype ParseError = ParseError String
+
+instance showParseError :: Show ParseError where
+  show (ParseError msg) = "Error: " <> msg
+
 newtype ParseState = ParseState {
   inp :: String,
   out :: String
 }
-
-type Parser = ParseState -> Either ParseError ParseState
-
-instance showParseError :: Show ParseError where
-  show (OhNo msg) = "Error: " <> msg
 
 instance showParseState :: Show ParseState where
   show (ParseState {inp, out}) = "inp: " <> inp <> ", out: " <> out
@@ -21,5 +23,5 @@ instance showParseState :: Show ParseState where
 -- | 
 
 string :: String -> Parser
-string str = \state -> Left (OhNo "No way")
+string str = \state -> Left (ParseError "No way")
 
