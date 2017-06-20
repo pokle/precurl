@@ -7,4 +7,4 @@ import Parse as P
 
 main :: forall e. Eff (console :: CONSOLE | e) Unit
 main = do
-  log (show (P.string "x" (P.ParseState { inp: "x", out: "x"})))
+  log (show (P.string "http://" (P.ParseState { inp: "http://blah", out: "x"})))
