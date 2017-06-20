@@ -3,14 +3,19 @@ module Parse where
 import Data.Either (Either(..))
 import Prelude (class Show, (<>))
 
--- | A Parser is just a function 
+--| A Parser performs some parsing on the given ParseState and
+--| generates the next ParseState (or an error)
 type Parser = ParseState -> Either ParseError ParseState
 
+--|
+--| Representation of errors while parsing
 newtype ParseError = ParseError String
 
 instance showParseError :: Show ParseError where
-  show (ParseError msg) = "Error: " <> msg
+  show (ParseError msg) = "ParseError: " <> msg
 
+--|
+--| 
 newtype ParseState = ParseState {
   inp :: String,
   out :: String
