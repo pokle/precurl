@@ -27,12 +27,13 @@ newtype ParseState = ParseState {
 instance showParseState :: Show ParseState where
   show (ParseState {inp, out}) = "{inp: " <> (show inp) <> ", out: " <> (show out) <> "}"
 
--- |
--- | 
+--|
+--| Parsers
 
 string :: String -> Parser
 string str (ParseState state) = 
   case stripPrefix (Pattern str) state.inp of
     Just suffix ->  Right (ParseState state { inp = suffix })
     _ -> Left (ParseError "No way")
+
 
