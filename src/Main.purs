@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
-import Parse (ParseState(..), inp, Parser, string, seq)
+import Parse (Parser, inp, seq, string)
 
 http :: Parser
 http = string "http://" 
