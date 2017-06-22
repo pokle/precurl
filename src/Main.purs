@@ -1,14 +1,20 @@
 module Main where
 
 import Prelude
-import Parse as P
+
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
-import Parse (Parser)
+import Parse (ParseState(..), inp, Parser, string, seq)
 
-parser :: Parser
-parser = P.string "http://" 
+http :: Parser
+http = string "http://" 
+
+dom :: Parser
+dom = string "purescript.org"
+
+parse :: Parser
+parse = seq [http, dom]
 
 main :: forall e. Eff (console :: CONSOLE | e) Unit
 main = do
-  log (show (parser (P.ParseState { inp: "http://blah", out: "x"})))
+  log $ show $ parse $ inp "http://purescript.org"
