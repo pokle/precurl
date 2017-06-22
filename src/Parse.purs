@@ -25,6 +25,7 @@ newtype ParseState = ParseState {
   out :: String
 }
 
+inp :: String -> ParseState
 inp s = ParseState { inp: s, out: "" }
 
 instance showParseState :: Show ParseState where
@@ -36,21 +37,21 @@ instance showParseState :: Show ParseState where
 string :: String -> Parser
 string str (ParseState state) = 
   case stripPrefix (Pattern str) state.inp of
-    Just suffix ->  Right (ParseState state { inp = suffix })
-    _ -> Left (ParseError ("Expected '" <> str <> "', but saw '" <> state.inp <> "'"))
+    Just suffix -> Right (ParseState state { inp = suffix })
+    Nothing     -> Left (ParseError ("Expected '" <> str <> "', but saw '" <> state.inp <> "'"))
 
 --|
 --| Combinators
 
-zeroParser :: Parser
-zeroParser ps = Right ps
+zero :: Parser
+zero ps = Right ps
 
-andParser :: Parser -> Parser -> Parser
-andParser a b parseState = case a parseState of
+and :: Parser -> Parser -> Parser
+and a b parseState = case a parseState of
   Right parseOfA -> b parseOfA
   Left parseError -> Left parseError  
 
 --| Calls a sequence of Parsers, and only succeeds if they all succeed.
 seq :: Array Parser -> Parser
-seq parsers = foldl andParser zeroParser parsers
+seq parsers = foldl and zero parsers
 
