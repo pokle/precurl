@@ -19,7 +19,7 @@ instance showParseError :: Show ParseError where
   show (ParseError msg) = "ParseError: " <> msg
 
 --|
---| 
+--| How do I make out a parametised type?
 newtype ParseState = ParseState {
   inp :: String,
   out :: String

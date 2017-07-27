@@ -6,15 +6,15 @@ import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
 import Parse (Parser, inp, seq, string)
 
-http :: Parser
-http = string "http://" 
+protocol :: Parser
+protocol = string "http://" 
 
-dom :: Parser
-dom = string "purescript.org"
+domain :: Parser
+domain = string "purescript.org"
 
-parse :: Parser
-parse = seq [http, dom]
+url :: Parser
+url = seq [protocol, domain]
 
 main :: forall e. Eff (console :: CONSOLE | e) Unit
 main = do
-  log $ show $ parse $ inp "http://purescript.org"
+  log $ show $ url $ inp "http://pur,escript.org"
