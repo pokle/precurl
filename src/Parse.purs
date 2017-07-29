@@ -3,9 +3,11 @@ module Parse where
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Data.Show (show)
-import Data.String (Pattern(..), stripPrefix)
+import Data.String (Pattern(..), stripPrefix, drop, length)
 import Prelude (class Show, (<>))
 import Data.Foldable (foldl)
+import Data.String.Regex (Regex, regex, match)
+import Data.String.Regex.Unsafe (unsafeRegex)
 
 --| A Parser performs some parsing on the given ParseState and
 --| generates the next ParseState (or an error)
@@ -40,6 +42,13 @@ string str (ParseState state) =
     Just suffix -> Right (ParseState state { inp = suffix })
     Nothing     -> Left (ParseError ("Expected '" <> str <> "', but saw '" <> state.inp <> "'"))
 
+--| Parse a parameter
+param :: String -> Regex -> Parser
+param name re (ParseState ps) =
+  case match re ps.inp of 
+    (Just [(Just prefix)]) -> Right (ParseState { inp: drop (length prefix) ps.inp, out: ps.out <> "," <> name <> "=" <> prefix })
+    _ -> Left (ParseError ("Expected to match " <> (show re) <> ", but saw '" <> ps.inp <> "'"))
+  
 --|
 --| Combinators
 
@@ -55,3 +64,9 @@ and a b parseState = case a parseState of
 seq :: Array Parser -> Parser
 seq parsers = foldl and zero parsers
 
+--| Always succeeds.
+optional :: Parser -> Parser
+optional p ps = 
+  case p ps of 
+    Left _ -> Right ps
+    blah -> blah

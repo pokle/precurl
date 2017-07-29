@@ -4,17 +4,20 @@ import Prelude
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
-import Parse (Parser, inp, seq, string)
+import Parse (Parser, inp, seq, optional, string, param)
+import Data.String.Regex.Unsafe (unsafeRegex)
+import Data.String.Regex.Flags (ignoreCase)
 
-protocol :: Parser
-protocol = string "http://" 
+keyword = param "keyword" (unsafeRegex "^[^/]+" ignoreCase)
+classification = param "classification" (unsafeRegex "^[^/]+" ignoreCase)
 
-domain :: Parser
-domain = string "purescript.org"
-
-url :: Parser
-url = seq [protocol, domain]
+serp = seq [ 
+  string "/",
+  optional (seq [ keyword, string "-" ]),
+  string "jobs",
+  optional (seq [ string "-in-", classification])
+]
 
 main :: forall e. Eff (console :: CONSOLE | e) Unit
 main = do
-  log $ show $ url $ inp "http://pur,escript.org"
+  log $ show $ serp $ inp "/cafe-jobs"
