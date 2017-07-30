@@ -1,13 +1,13 @@
-module Parse where
+module Recurl.Parse where
 
 import Data.Either (Either(..))
+import Data.Eq (class Eq, eq)
+import Data.Foldable (foldl)
 import Data.Maybe (Maybe(..))
 import Data.Show (show)
 import Data.String (Pattern(..), stripPrefix, drop, length)
-import Prelude (class Show, (<>))
-import Data.Foldable (foldl)
-import Data.String.Regex (Regex, regex, match)
-import Data.String.Regex.Unsafe (unsafeRegex)
+import Data.String.Regex (Regex, match)
+import Prelude (class Show, (<>), (&&))
 
 --| A Parser performs some parsing on the given ParseState and
 --| generates the next ParseState (or an error)
@@ -17,8 +17,12 @@ type Parser = ParseState -> Either ParseError ParseState
 --| Representation of errors while parsing
 newtype ParseError = ParseError String
 
-instance showParseError :: Show ParseError where
+instance showParseErrorShow :: Show ParseError where
   show (ParseError msg) = "ParseError: " <> msg
+
+instance showParseErrorEq :: Eq ParseError where
+  eq (ParseError msga) (ParseError msgb) = eq msga msgb
+
 
 --|
 --| How do I make out a parametised type?
@@ -26,6 +30,9 @@ newtype ParseState = ParseState {
   inp :: String,
   out :: String
 }
+instance parseStateEq :: Eq ParseState where
+  eq (ParseState {inp:inp1, out:out1}) (ParseState {inp:inp2, out:out2}) = 
+    (eq inp1 inp2) && (eq out1 out2)
 
 inp :: String -> ParseState
 inp s = ParseState { inp: s, out: "" }

@@ -2,11 +2,18 @@ module Test.Main where
 
 import Prelude
 
-import Control.Monad.Cont (callCC)
 import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, log)
+import Data.Either (Either(..))
 
+import Recurl.Demo (serp)
+import Recurl.Parse (inp)
+import Test.Spec (pending, describe, it)
+import Test.Spec.Assertions (shouldEqual)
+import Test.Spec.Reporter.Console (consoleReporter)
+import Test.Spec.Runner (RunnerEffects, run)
 
-main :: forall e. Eff (console :: CONSOLE | e) Unit
-main = do
-  log "You should add some tests."
+main :: Eff (RunnerEffects ()) Unit
+main = run [consoleReporter] do
+  describe "serp demo" do
+    it "can parse a minimal /jobs path" do
+      (serp $ inp "/jobs") `shouldEqual` (Right (inp ""))
