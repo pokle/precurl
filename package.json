@@ -1,0 +1,29 @@
+{
+  "name": "recurl",
+  "version": "1.0.0",
+  "description": "Purescript parser combinators",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "bower": "bower",
+    "pulp": "pulp",
+    "test": "pulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pokle/recurl.git"
+  },
+  "keywords": [],
+  "author": "Tushar Pokle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pokle/recurl/issues"
+  },
+  "homepage": "https://github.com/pokle/recurl#readme",
+  "devDependencies": {
+    "bower": "1.8.0",
+    "purescript": "0.11.6"
+  }
+}
