@@ -39,7 +39,7 @@ inp :: String -> ParseState
 inp s = ParseState { inp: s, out: "" }
 
 instance showParseState :: Show ParseState where
-  show (ParseState {inp, out}) = "{inp: " <> (show inp) <> ", out: " <> (show out) <> "}"
+  show (ParseState {inp, out}) = "ParseState {inp: " <> (show inp) <> ", out: " <> (show out) <> "}"
 
 --|
 --| Parsers
