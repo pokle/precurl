@@ -1,0 +1,27 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          - v1-deps-
+
+      - run: npm i && npm run bower install
+
+      - save_cache:
+          key: v1-deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          paths:
+            - bower_components
+            - node_modules
+
+      # run tests!
+      - run: npm run pulp test

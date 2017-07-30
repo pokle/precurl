@@ -30,6 +30,7 @@ newtype ParseState = ParseState {
   inp :: String,
   out :: String
 }
+
 instance parseStateEq :: Eq ParseState where
   eq (ParseState {inp:inp1, out:out1}) (ParseState {inp:inp2, out:out2}) = 
     (eq inp1 inp2) && (eq out1 out2)
