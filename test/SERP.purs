@@ -1,3 +1,5 @@
+--| DEMO parser for the Search Results Page (serp)
+--| of www.seek.com.au.
 module Recurl.Demo where
 
 import Prelude
@@ -12,8 +14,6 @@ keyword = param "keyword" (unsafeRegex "^[^/]+(?=-jobs)" ignoreCase)
 classification :: Parser
 classification = param "classification" (unsafeRegex "^[^/]+" ignoreCase)
 
---| DEMO parser for the Search Results Page (serp)
---| of www.seek.com.au.
 serp :: Parser
 serp = seq [ 
   string "/",
