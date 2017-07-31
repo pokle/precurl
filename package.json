@@ -10,6 +10,7 @@
     "bower": "bower",
     "pulp": "pulp",
     "test": "pulp test",
+    "clean": "rm -rf output",
     "bundle": "pulp build --modules Recurl --optimise --skip-entry-point --main Recurl --to output/bundle.js"
   },
   "repository": {

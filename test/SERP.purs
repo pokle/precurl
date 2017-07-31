@@ -4,7 +4,7 @@ module Recurl.Demo where
 
 import Prelude
 
-import Recurl.Parse (Parser, seq, optional, string, param)
+import Recurl (Parser, seq, optional, string, param)
 import Data.String.Regex.Unsafe (unsafeRegex)
 import Data.String.Regex.Flags (ignoreCase)
 

@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Monad.Eff (Eff)
 import Data.Either (Either(..))
-import Recurl.Parse (ParseState(..),parseState)
+import Recurl (ParseState(..),parseState)
 import Recurl.Demo (serp)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
