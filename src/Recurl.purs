@@ -1,4 +1,4 @@
-module Recurl.Parse where
+module Recurl where
 
 import Data.Either (Either(..))
 import Data.Eq (class Eq, eq)
@@ -35,11 +35,12 @@ instance parseStateEq :: Eq ParseState where
   eq (ParseState {inp:inp1, out:out1}) (ParseState {inp:inp2, out:out2}) = 
     (eq inp1 inp2) && (eq out1 out2)
 
-inp :: String -> ParseState
-inp s = ParseState { inp: s, out: "" }
+--| Handy helper to help you make a ParseState with just the input string.
+parseState :: String -> ParseState
+parseState s = ParseState { inp: s, out: "" }
 
 instance showParseState :: Show ParseState where
-  show (ParseState {inp, out}) = "{inp: " <> (show inp) <> ", out: " <> (show out) <> "}"
+  show (ParseState {inp, out}) = "ParseState {inp: " <> (show inp) <> ", out: " <> (show out) <> "}"
 
 --|
 --| Parsers
@@ -64,7 +65,7 @@ zero :: Parser
 zero ps = Right ps
 
 and :: Parser -> Parser -> Parser
-and a b parseState = case a parseState of
+and a b ps = case a ps of
   Right parseOfA -> b parseOfA
   Left parseError -> Left parseError  
 
