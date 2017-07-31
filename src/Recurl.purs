@@ -1,4 +1,4 @@
-module Recurl.Parse where
+module Recurl where
 
 import Data.Either (Either(..))
 import Data.Eq (class Eq, eq)

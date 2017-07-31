@@ -2,14 +2,15 @@
   "name": "recurl",
   "version": "1.0.0",
   "description": "Purescript parser combinators",
-  "main": "index.js",
+  "main": "output/bundle.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "bower": "bower",
     "pulp": "pulp",
-    "test": "pulp test"
+    "test": "pulp test",
+    "bundle": "pulp build --modules Recurl --optimise --skip-entry-point --main Recurl --to output/bundle.js"
   },
   "repository": {
     "type": "git",
