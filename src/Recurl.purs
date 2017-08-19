@@ -7,7 +7,7 @@ import Data.Maybe (Maybe(..))
 import Data.Show (show)
 import Data.String (Pattern(..), stripPrefix, drop, length)
 import Data.String.Regex (Regex, match)
-import Prelude (class Show, (<>), (&&))
+import Prelude (class Show, (<>), (&&), (==))
 
 --| A Parser performs some parsing on the given ParseState and
 --| generates the next ParseState (or an error)
@@ -61,9 +61,11 @@ param name re (ParseState ps) =
 --|
 --| Combinators
 
-zero :: Parser
-zero ps = Right ps
+--| Identity
+id :: Parser
+id ps = Right ps
 
+--| Pipe one parser to the second
 and :: Parser -> Parser -> Parser
 and a b ps = case a ps of
   Right parseOfA -> b parseOfA
@@ -71,11 +73,21 @@ and a b ps = case a ps of
 
 --| Calls a sequence of Parsers, and only succeeds if they all succeed.
 seq :: Array Parser -> Parser
-seq parsers = foldl and zero parsers
+seq parsers = foldl and id parsers
 
 --| Always succeeds.
 optional :: Parser -> Parser
 optional p ps = 
   case p ps of 
     Left _ -> Right ps
+    blah -> blah
+
+--| No leftovers
+complete :: Parser -> Parser
+complete p ps =
+  case p ps of
+    Right (ParseState {inp,out}) -> 
+      if inp == "" 
+      then Right (ParseState {inp,out}) 
+      else Left (ParseError ("Dregs: " <> inp))
     blah -> blah

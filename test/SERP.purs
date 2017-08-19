@@ -1,6 +1,6 @@
 --| DEMO parser for the Search Results Page (serp)
 --| of www.seek.com.au.
-module Recurl.Demo where
+module Test.SERP where
 
 import Prelude
 
