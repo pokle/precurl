@@ -1,6 +1,6 @@
 {
-  "name": "recurl",
-  "version": "1.0.0",
+  "name": "precurl",
+  "version": "0.0.1",
   "description": "Purescript parser combinators",
   "main": "output/bundle.js",
   "directories": {
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pokle/recurl.git"
+    "url": "git+https://github.com/pokle/precurl.git"
   },
   "keywords": [],
   "author": "Tushar Pokle",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pokle/recurl/issues"
+    "url": "https://github.com/pokle/precurl/issues"
   },
-  "homepage": "https://github.com/pokle/recurl#readme",
+  "homepage": "https://github.com/pokle/precurl#readme",
   "devDependencies": {
     "bower": "1.8.0",
     "handlebars": "^4.0.10",
