@@ -12,13 +12,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          - v1-deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
           - v1-deps-
 
       - run: make deps
 
       - save_cache:
-          key: v1-deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          key: v1-deps-{{ checksum "bower.json" }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
           paths:
             - bower_components
             - node_modules

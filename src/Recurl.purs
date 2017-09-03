@@ -1,4 +1,4 @@
-module Recurl where
+module Precurl where
 
 import Data.Either (Either(..))
 import Data.Eq (class Eq, eq)

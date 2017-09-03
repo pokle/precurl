@@ -8,7 +8,7 @@
 module Test.Flat where
 
 import Prelude (($))
-import Recurl (Parser,  string, param, and, optional, complete)
+import Precurl (Parser,  string, param, and, optional, complete)
 import Data.String.Regex.Unsafe (unsafeRegex)
 import Data.String.Regex.Flags (ignoreCase)
 

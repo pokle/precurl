@@ -4,7 +4,7 @@ module Test.SERP where
 
 import Prelude
 
-import Recurl (Parser, seq, optional, string, param)
+import Precurl (Parser, seq, optional, string, param)
 import Data.String.Regex.Unsafe (unsafeRegex)
 import Data.String.Regex.Flags (ignoreCase)
 

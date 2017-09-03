@@ -13,8 +13,8 @@ bower_components: bower.json
 bundle: output/bundle.js
 
 output/bundle.js: node_modules bower_components
-	# pulp build --optimise --main Recurl | uglifyjs > output/bundle.js
-	pulp build --modules Recurl --optimise --skip-entry-point --main Recurl --to $@
+	# pulp build --optimise --main Precurl | uglifyjs > output/bundle.js
+	pulp build --modules Precurl --optimise --skip-entry-point --main Precurl --to $@
 
 ## Dev time tasks
 test: deps
