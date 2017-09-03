@@ -1,7 +1,7 @@
 # precurl
 Purescript parser combinators.
 
-[![CircleCI](https://circleci.com/gh/pokle/precurl/tree/master.svg?style=svg&circle-token=bb2fbb7df82113f1466c0fb05fd10bcfc27b228b)](https://circleci.com/gh/pokle/precurl/tree/master)
+[![CircleCI](https://circleci.com/gh/pokle/precurl.svg?style=svg)](https://circleci.com/gh/pokle/precurl)
 
 Still early days, but a simple parser combinator library for Purescript.
 
